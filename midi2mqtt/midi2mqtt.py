@@ -44,7 +44,7 @@ def main():
                         type=int, default=1883)
     parser.add_argument('--midiport',
                         help="Port of the MIDI Interface, default:1",
-                        type=int, default=1)
+                        type=int, default=0)
     parser.add_argument('--topicprefix',
                         help="Prefix for the MQTT topic default:midi",
                         type=str, default="midi")
