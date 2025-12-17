@@ -64,6 +64,8 @@ def main():
           args.topicprefix+'/#" -v'.format(args.host))
     client = Midi2Broker(args.host,
                          args.port,
+                         args.username,
+                         args.password,
                          args.midiport,
                          args.topicprefix)
     client.start_loop()
