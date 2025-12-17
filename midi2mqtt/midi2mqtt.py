@@ -8,7 +8,7 @@ import time
 class Midi2Broker:
     """Receiving MIDI events and sending them to an MQTT broker."""
 
-    def __init__(self, host, port, midi_port, topicprefix):
+    def __init__(self, host, port, username, password, midi_port, topicprefix):
         self.topicprefix = topicprefix
         self.midiin, port_name = midi.open_midiinput(midi_port)
         print("listening to midi device", port_name)
@@ -16,6 +16,10 @@ class Midi2Broker:
 
         print("connecting and sending msgs to", host, port)
         self.mqtt = mqtt.Client()
+
+        if username and password:
+            self.mqtt.username_pw_set(username, password)
+        
         self.mqtt.connect(host, port)
 
     def on_midi_event(self, event, data=None):
@@ -42,6 +46,12 @@ def main():
     parser.add_argument('--port',
                         help="Port of the MQTT-Broker, default: 1883",
                         type=int, default=1883)
+    parser.add_argument('--username',
+                        help="Set username for MQTT-Broker authentication",
+                        type=str)
+    parser.add_argument('--password',
+                        help="Set password for MQTT-Broker authentication",
+                        type=str)
     parser.add_argument('--midiport',
                         help="Port of the MIDI Interface, default:1",
                         type=int, default=0)
