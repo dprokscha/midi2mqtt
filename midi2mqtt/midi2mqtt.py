@@ -11,10 +11,11 @@ class Midi2Broker:
     def __init__(self, host, port, username, password, midi_port, topicprefix):
         self.topicprefix = topicprefix
         self.midiin, port_name = midi.open_midiinput(midi_port)
+        
         print("listening to midi device", port_name)
         self.midiin.set_callback(self.on_midi_event)
 
-        print("connecting and sending msgs to", host, port)
+        print("connecting and sending messages to", host, port)
         self.mqtt = mqtt.Client()
 
         if username and password:
@@ -30,6 +31,7 @@ class Midi2Broker:
             self.topicprefix+"/chan/{0}/note/{1}/".format(chan, note), val)
 
     def publish(self, topic, payload):
+        print("publishing message", topic, payload)
         self.mqtt.publish(topic, payload)
 
     def start_loop(self):
@@ -60,14 +62,13 @@ def main():
                         type=str, default="midi")
     args = parser.parse_args()
 
-    print('Use a client to watch mqtt messages: mosquitto_sub -h {} -t "' +
-          args.topicprefix+'/#" -v'.format(args.host))
     client = Midi2Broker(args.host,
                          args.port,
                          args.username,
                          args.password,
                          args.midiport,
                          args.topicprefix)
+    
     client.start_loop()
 
     print("finished")
