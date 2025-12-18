@@ -35,7 +35,10 @@ class Midi2MQTT:
 
     def loop_forever(self):
         """Run an endless loop and wait for events."""
-        self.mqtt.loop_forever()
+        try:
+            self.mqtt.loop_forever()
+        except KeyboardInterrupt:
+            print("exit")
 
 
 def main():
@@ -71,7 +74,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("finished")
+    main()
