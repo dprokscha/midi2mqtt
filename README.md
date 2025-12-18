@@ -3,11 +3,10 @@ Listen to MIDI signals and send them to a mqtt broker.
 
 ## Installation
 
-It can be installed by pip from pipy or from the git repo location
-
-	# from PyPI
-	$ pip install midi2mqtt
+It can be installed by pip from git repo location or via Astral
 	
 	# from sources
-	$ pip install git+https://github.com/pintman/midi2mqtt
+	$ pip install git+https://github.com/dprokscha/midi2mqtt
 
+	# from Astral
+	$ uvx git+https://github.com/dprokscha/midi2mqtt
