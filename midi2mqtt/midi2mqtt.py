@@ -4,7 +4,7 @@ import argparse
 import time
 
 
-class Midi2Broker:
+class Midi2MQTT:
     """Receiving MIDI events and sending them to an MQTT broker."""
 
     def __init__(self, host, port, username, password, midi_port, topicprefix):
@@ -61,12 +61,12 @@ def main():
                         type=str, default="midi")
     args = parser.parse_args()
 
-    client = Midi2Broker(args.host,
-                         args.port,
-                         args.username,
-                         args.password,
-                         args.midiport,
-                         args.topicprefix)
+    client = Midi2MQTT(args.host,
+                       args.port,
+                       args.username,
+                       args.password,
+                       args.midiport,
+                       args.topicprefix)
     
     client.start_loop()
 
