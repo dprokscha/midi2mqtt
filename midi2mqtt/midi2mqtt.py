@@ -33,10 +33,9 @@ class Midi2MQTT:
         print("publishing message", topic, payload)
         self.mqtt.publish(topic, payload)
 
-    def start_loop(self):
+    def loop_forever(self):
         """Run an endless loop and wait for events."""
-        while True:
-            time.sleep(1)
+        self.mqtt.loop_forever()
 
 
 def main():
@@ -68,7 +67,7 @@ def main():
                        args.midiport,
                        args.topicprefix)
     
-    client.start_loop()
+    client.loop_forever()
 
 
 if __name__ == "__main__":
