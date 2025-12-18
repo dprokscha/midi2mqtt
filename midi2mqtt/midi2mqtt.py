@@ -71,7 +71,10 @@ def main():
     
     client.start_loop()
 
-    print("finished")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("finished")
+        pass
